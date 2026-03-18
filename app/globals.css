@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #0a0a14;
+  color: #e8e8f0;
+  font-family: 'Space Mono', monospace;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.tile-pop { animation: pop 0.1s ease; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-8px); }
+  30% { transform: translateX(8px); }
+  45% { transform: translateX(-6px); }
+  60% { transform: translateX(6px); }
+  75% { transform: translateX(-3px); }
+  90% { transform: translateX(3px); }
+}
+
+.shake-row { animation: shake 0.5s ease; }
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.tile-flip-0 { animation: flipReveal 0.5s ease forwards; }
+.tile-flip-1 { animation: flipReveal 0.5s ease 80ms forwards; }
+.tile-flip-2 { animation: flipReveal 0.5s ease 160ms forwards; }
+.tile-flip-3 { animation: flipReveal 0.5s ease 240ms forwards; }
+.tile-flip-4 { animation: flipReveal 0.5s ease 320ms forwards; }
+
+@keyframes flipReveal {
+  0% { transform: rotateX(0deg); }
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+button:hover { filter: brightness(1.15); }
+button:active { filter: brightness(0.9); transform: scale(0.97); }
