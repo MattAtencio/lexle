@@ -151,6 +151,108 @@ function Toast({ message }) {
   );
 }
 
+// ─── Onboarding Modal ─────────────────────────────────────────────────────────
+const demoTile = {
+  width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center",
+  fontSize: 16, fontWeight: 800, fontFamily: "'Space Mono', monospace",
+  border: "2px solid #3a3a4a", borderRadius: 4, color: "#e8e8f0",
+  background: "transparent",
+};
+
+function OnboardingModal({ onClose }) {
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)",
+      display: "flex", alignItems: "center", justifyContent: "center", zIndex: 200,
+      backdropFilter: "blur(4px)",
+    }}>
+      <div onClick={(e) => e.stopPropagation()} style={{
+        background: "#12121e", border: "1px solid #2a2a4a",
+        borderRadius: 16, padding: "32px 28px", maxWidth: 360, width: "90%",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.6)",
+      }}>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <h2 style={{
+            fontFamily: "'Space Mono', monospace", fontSize: 28, fontWeight: 700,
+            color: "#e8e8f0", letterSpacing: 8, margin: 0,
+          }}>LEXLE</h2>
+          <p style={{
+            fontFamily: "'Space Mono', monospace", fontSize: 10, color: "#4a4a6a",
+            letterSpacing: 4, marginTop: 4,
+          }}>DAILY WORD PUZZLE</p>
+        </div>
+
+        <p style={{
+          fontFamily: "'Space Mono', monospace", fontSize: 13, color: "#c8c8e0",
+          lineHeight: 1.6, marginBottom: 16, textAlign: "center",
+        }}>
+          Guess the 5-letter word in 6 tries. Each guess reveals clues.
+        </p>
+
+        {/* Demo tiles */}
+        <div style={{
+          background: "#07070f", borderRadius: 12, padding: "14px 12px",
+          marginBottom: 18, display: "flex", flexDirection: "column", gap: 8,
+        }}>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <div style={{ ...demoTile, background: "#4ade80", color: "#0a0a14", borderColor: "transparent" }}>S</div>
+            <div style={demoTile}>T</div>
+            <div style={demoTile}>A</div>
+            <div style={demoTile}>R</div>
+            <div style={demoTile}>E</div>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: "#4ade80", marginLeft: 8 }}>CORRECT SPOT</span>
+          </div>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <div style={demoTile}>C</div>
+            <div style={{ ...demoTile, background: "#f59e0b", color: "#0a0a14", borderColor: "transparent" }}>R</div>
+            <div style={demoTile}>A</div>
+            <div style={demoTile}>N</div>
+            <div style={demoTile}>E</div>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: "#f59e0b", marginLeft: 8 }}>WRONG SPOT</span>
+          </div>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <div style={demoTile}>T</div>
+            <div style={demoTile}>R</div>
+            <div style={demoTile}>A</div>
+            <div style={demoTile}>I</div>
+            <div style={{ ...demoTile, background: "#2a2a3a", color: "#6b6b8a", borderColor: "transparent" }}>L</div>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: "#6b6b8a", marginLeft: 8 }}>NOT IN WORD</span>
+          </div>
+        </div>
+
+        <div style={{
+          fontFamily: "'Space Mono', monospace", fontSize: 11, color: "#7c7c9a",
+          lineHeight: 1.8, marginBottom: 8,
+        }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
+            <span style={{ color: "#4ade80", fontSize: 13, lineHeight: 1 }}>{"\u2328"}</span>
+            <span>Type a 5-letter word and press <span style={{ color: "#e8e8f0" }}>ENTER</span></span>
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
+            <span style={{ color: "#f59e0b", fontSize: 13, lineHeight: 1 }}>{"\uD83D\uDD0D"}</span>
+            <span>Use the clues to narrow it down</span>
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+            <span style={{ color: "#a78bfa", fontSize: 13, lineHeight: 1 }}>{"\u2728"}</span>
+            <span>A new word every day</span>
+          </div>
+        </div>
+
+        <button onClick={onClose} style={{
+          width: "100%", padding: "14px", marginTop: 16,
+          background: "linear-gradient(135deg, #059669, #4ade80)",
+          border: "none", borderRadius: 10, color: "#0a0a14",
+          fontFamily: "'Space Mono', monospace", fontWeight: 800,
+          fontSize: 13, letterSpacing: 3, cursor: "pointer",
+          boxShadow: "0 6px 24px rgba(74,222,128,0.3)",
+        }}>
+          PLAY
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Stats Modal ───────────────────────────────────────────────────────────────
 function StatsModal({ guessCount, answer, won, onClose }) {
   return (
@@ -208,6 +310,10 @@ export default function Lexle() {
   const [shakeRow, setShakeRow] = useState(null);
   const [revealingRow, setRevealingRow] = useState(null);
   const [showStats, setShowStats] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return !localStorage.getItem("lexle-onboarded");
+  });
 
   // Load daily state from localStorage
   useEffect(() => {
@@ -408,6 +514,19 @@ export default function Lexle() {
             GUESS THE WORD
           </p>
         </div>
+
+        <button
+          onClick={() => setShowOnboarding(true)}
+          style={{
+            position: "absolute", right: 20, background: "transparent",
+            border: "1px solid #2a2a4a", borderRadius: "50%",
+            width: 30, height: 30, display: "flex", alignItems: "center",
+            justifyContent: "center", cursor: "pointer", color: "#4a4a6a",
+            fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700,
+          }}
+        >
+          ?
+        </button>
       </header>
 
       {/* Grid */}
@@ -451,6 +570,12 @@ export default function Lexle() {
           won={won}
           onClose={() => setShowStats(false)}
         />
+      )}
+      {showOnboarding && (
+        <OnboardingModal onClose={() => {
+          setShowOnboarding(false);
+          if (typeof window !== "undefined") localStorage.setItem("lexle-onboarded", "1");
+        }} />
       )}
     </div>
   );
