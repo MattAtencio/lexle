@@ -4,6 +4,7 @@ export const metadata = {
   title: "Lexle",
   description: "A daily word-guessing game — guess the five-letter word in six tries",
   manifest: "/manifest.json",
+  icons: { icon: "/icon.svg", apple: "/icon.svg" },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
