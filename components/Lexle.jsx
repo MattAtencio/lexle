@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { WORDS, VALID_WORDS } from "@/data/words";
 
 const MAX_GUESSES = 6;
@@ -531,6 +532,22 @@ export default function Lexle() {
           ?
         </button>
       </header>
+
+      {/* Guide link */}
+      <Link
+        href="/help"
+        style={{
+          fontFamily: "'Space Mono', monospace",
+          fontSize: 10,
+          color: "#4a4a6a",
+          letterSpacing: 3,
+          textDecoration: "none",
+          marginTop: -20,
+          marginBottom: 16,
+        }}
+      >
+        GUIDE
+      </Link>
 
       {/* Grid */}
       <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 32 }}>

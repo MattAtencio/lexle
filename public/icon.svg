@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="96" ry="96" fill="#0a0a14"/>
+
+  <!-- Subtle border -->
+  <rect x="4" y="4" width="504" height="504" rx="92" ry="92" fill="none" stroke="#1e1e2e" stroke-width="4"/>
+
+  <!-- Letter tile grid: 3 tiles in a row -->
+  <!-- Tile 1: correct (green) - letter L -->
+  <rect x="88" y="196" width="100" height="120" rx="12" fill="#4ade80"/>
+  <text x="138" y="272" text-anchor="middle" font-family="monospace" font-weight="800" font-size="64" fill="#0a0a14">L</text>
+
+  <!-- Tile 2: present (amber) - letter E -->
+  <rect x="206" y="196" width="100" height="120" rx="12" fill="#f59e0b"/>
+  <text x="256" y="272" text-anchor="middle" font-family="monospace" font-weight="800" font-size="64" fill="#0a0a14">E</text>
+
+  <!-- Tile 3: absent (dark) - letter X -->
+  <rect x="324" y="196" width="100" height="120" rx="12" fill="#2a2a3a"/>
+  <text x="374" y="272" text-anchor="middle" font-family="monospace" font-weight="800" font-size="64" fill="#6b6b8a">X</text>
+</svg>
