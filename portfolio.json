@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/MattAtencio/portfolio/main/schemas/portfolio.schema.json",
+  "title": "Lexle",
+  "tagline": "Daily word puzzle in the style of Wordle",
+  "description": "Lexle is a daily word-guessing game inspired by Wordle. Players have six attempts to guess a hidden five-letter word, with color-coded feedback after each guess indicating correct letters and positions.",
+  "category": "games",
+  "status": "active",
+  "techStack": [
+    "Next.js",
+    "JavaScript",
+    "PWA",
+    "CSS Modules"
+  ],
+  "liveUrl": "https://lexle.mattatencio.com",
+  "highlights": [
+    "Daily puzzle rotation with seeded word selection",
+    "Color-coded letter feedback with keyboard tracking",
+    "Installable PWA with offline support"
+  ],
+  "isPublic": true,
+  "startDate": "2025-03",
+  "featured": false
+}
